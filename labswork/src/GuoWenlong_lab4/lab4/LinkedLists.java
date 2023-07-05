@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 public class LinkedLists<E> implements List<E>, Stack<E> {
     // s for test the result of add and remove
-    String s="list[  ]: ";
+//    String s="list[  ]: ";
     int size = 0;
     List<E> list;
     //    E item;
@@ -53,8 +53,8 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         int count = 0;
         System.out.println("size(before while loop) " + count);
         Node<E> tails = this.first;
-        while (tails!=null){
-            tails=tails.next;
+        while (tails != null) {
+            tails = tails.next;
             count++;
         }
         System.out.println("size(after while loop) " + count);
@@ -188,8 +188,8 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             current = current.prev;
         }
         first = newNode;
-        first.next=current;
-        current.prev=first;
+        first.next = current;
+        current.prev = first;
         size++;
         System.out.println(printOut());
 
@@ -212,22 +212,52 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         } else if (i < 0) {
             index = this.size() + i;
         }
-        System.out.println("add index after check i><0, i= "+i +" after check i = "+index);
+        System.out.println("add index after check i><0, i= " + i + " after check i = " + index);
         Node<E> x = new Node<>(e);
         Node<E> c = first;
         Node<E> d = first;
-        for (int k = 0; k < index-1; k++) {
-            c=c.next;
+        for (int k = 0; k < index - 1; k++) {
+            c = c.next;
         }
-        d=c.next;
-        d.prev=x;
-        x.next=d;
-        c.next=x;
-        x.prev=c;
-
-
+        d = c.next;
+        d.prev = x;
+        x.next = d;
+        c.next = x;
+        x.prev = c;
 //        Node<E> insert = new Node(x, get(index), xNext);
         //todo get method may destroy the original list ,need to figure out
+    }
+
+    @Override
+    public E remove(int i) throws IndexOutOfBoundsException {
+        int index = 0;
+        if (Math.abs(i) > size() || i >= size()) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            if (i >= 0) {
+                index = i;
+            } else {
+                index = size() + i;
+            }
+        }
+        Node c = first;
+        Node d = first.next;
+
+        System.out.println("c in remove hash: "+c.hashCode());
+        System.out.println("first in remove hash: "+first.hashCode());
+        System.out.println("c==first: " + (c==first));
+
+        for (int k = 0; k < index; k++) {
+            c = c.next;
+        }
+        c.prev=c.next;
+        c.next=c.prev;//dosen't effect the list itself ,X
+        // if index = 0; c is first;
+        // to remove [c,remove,d]
+
+        Node e = c;
+        System.out.println("e in remove hash: "+e.hashCode());
+        return (E) c.item;
     }
 
     /**
@@ -238,8 +268,8 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      * @return the element that was removed
      * @throws IndexOutOfBoundsException- if index ∉ [-size(), size())
      */
-    @Override
-    public E remove(int i) throws IndexOutOfBoundsException {
+
+    public E REMOVE(int i) throws IndexOutOfBoundsException {
         int index = 0;
         final Node<E> prev;
         final Node<E> next;
@@ -353,21 +383,22 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
     //todo not finished ,get rid of list
 
     /**
-     *
      * @return
      */
-    public String printOut(){
-
+    public String printOut() {
+        String s = "";
+//        E[] sArray = (E[]) new Object[size()];
         Node c = first;
-        while (c!=null){
-            c= c.next;
-            s+=this.first.item.toString()+", ";
-
-        }return s;
+        while (c != null) {
+            s = s + ", " + c.item.toString();
+            c = c.next;
+        }
+        //System.out.println(list.stream().collect(Collectors.joining(" ")));
+//        System.out.println( list.iterator().toString());// doesn't print out every element
+        return s;
         //+System.lineSeparator()
     }
 }
-
 
 
 class Node<E> {
