@@ -5,7 +5,6 @@ import java.util.LinkedList;
 public class Test {
     public static void main(String[] args) {
         LinkedLists<Integer> list = new LinkedLists<>();
-        LinkedList realList = new LinkedList<>();
         System.out.println(list.size);
         System.out.println(list.first);
         list.add(0);
@@ -13,7 +12,7 @@ public class Test {
         list.add(1);
         System.out.println("test for add(e),expect: Node{item=1} get :"+list.first);
         list.add(2);
-        System.out.println(list.printOut());
+        list.traverse("add 0 - 1 - 2");
         System.out.println("test for add(e),expect: Node{item=2} get :"+list.first);
         System.out.println("test for first(),expect: 2 get :"+list.first());
         System.out.println("test for last(),expect: 0 get :"+list.last());
@@ -29,11 +28,14 @@ public class Test {
         System.out.println("printOut"+list.printOut());
         System.out.println(list.printOut());
         System.out.println(list.remove(0) + " expect 66 ,[2,1,0] "+list.printOut());
+        System.out.println("after 0"+list.printOut());
         System.out.println(list.remove(-1) + "  "+list.printOut());
         list.add(3);
         System.out.println(list.printOut());
         System.out.println("test for get(1),expect: 2 get :"+list.get(1));
         System.out.println("test for get(1),expect: 2 get :"+list.get(0));
+        System.out.println(list.printOut());
+        list.add(77);
 
     }
     public Object[] toArray(LinkedLists lists){

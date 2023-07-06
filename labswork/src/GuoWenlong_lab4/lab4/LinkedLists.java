@@ -20,6 +20,15 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         size = 0;
     }
 
+    public void traverse(String s) {
+        Node current = this.first;
+        System.out.println("\n"+s);
+        while (current != null) {
+            System.out.print(current.item + " ");
+            current = current.next;
+        }
+    }
+
     /**
      * Test whether any elements are currently waiting on the stack.
      *
