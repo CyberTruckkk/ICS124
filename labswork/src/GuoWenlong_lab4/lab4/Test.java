@@ -24,16 +24,16 @@ public class Test {
         System.out.println("test for indexOf(2),expect: 0 get :"+list.indexOf(2));
         System.out.println("add at index 0");
         list.add(66,0);
+        System.out.println("indeex of 66 "+list.indexOf(66));
         System.out.println("size:4 " + list.size());
         System.out.println("printOut"+list.printOut());
-        //list = [0,66,1,2]
-        System.out.println("list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 1 get :"+list.indexOf(66));
-        System.out.println("list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 0 get :"+list.indexOf(2));
-        System.out.println("list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 2 get :"+list.indexOf(1));
-        System.out.println(list.printOut()+" list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 3 get :"+list.indexOf(0));
         System.out.println(list.printOut());
-        System.out.println(list.remove(0) + "  "+list.printOut());
-        System.out.println(list.remove(1) + "  "+list.printOut());
+        System.out.println(list.remove(0) + " expect 66 ,[2,1,0] "+list.printOut());
+        System.out.println(list.remove(-1) + "  "+list.printOut());
+        list.add(3);
+        System.out.println(list.printOut());
+        System.out.println("test for get(1),expect: 2 get :"+list.get(1));
+        System.out.println("test for get(1),expect: 2 get :"+list.get(0));
 
     }
     public Object[] toArray(LinkedLists lists){

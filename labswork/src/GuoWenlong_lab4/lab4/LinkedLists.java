@@ -174,7 +174,6 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         first.next = current;
         current.prev = first;
         size++;
-        System.out.println(printOut());
 
     }
 
@@ -199,48 +198,19 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         Node<E> x = new Node<>(e);
         Node<E> c = first;
         Node<E> d = first;
-
-        for (int k = 0; k < index; k++) {
-            c = c.next;
-        }
-        d = c.next;
-        d.prev = x;
-        x.next = d;
-        c.next = x;
-        x.prev = c;
-    }
-
-    @Override
-    public E remove(int i) throws IndexOutOfBoundsException {
-        int index = 0;
-        if (Math.abs(i) > size() || i >= size()||first==null) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            if (i >= 0) {
-                index = i;
-            } else {
-                index = size() + i;
+        if (index > 0) {
+            for (int k = 0; k < index; k++) {
+                c = c.next;
             }
+            d = c.next;
+            d.prev = x;
+            x.next = d;
+            c.next = x;
+            x.prev = c;
+        }else if(index==0){
+            add(e);
         }
-        Node c = first;
-        final Node zero = first;
-//        System.out.println("c in remove hash: " + c.hashCode());
-//        System.out.println("first in remove hash: " + first.hashCode());
-//        System.out.println("c==first: " + (c == first));
-        if (index == 0) {
-            c = first.next;
-            first=first.next;
-//            first.next.prev = c;
-//            c.next = first.next;
-            return (E) zero.item;
-        }
-        for (int k = 0; k < index; k++) {
-            c = c.next;
-        }
-        c.prev.next = c.next;
-        c.next.prev = c.prev;
-//        System.out.println("e in remove hash: " + e.hashCode());
-        return (E) c.item;
+
     }
 
     /**
@@ -251,37 +221,41 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      * @return the element that was removed
      * @throws IndexOutOfBoundsException- if index ∉ [-size(), size())
      */
-
-    public E REMOVE(int i) throws IndexOutOfBoundsException {
+    @Override
+    public E remove(int i) throws IndexOutOfBoundsException {
         int index = 0;
-        final Node<E> prev;
-        final Node<E> next;
-        Node key = new Node(null);
-        if (Math.abs(i) > this.size()) {
-            throw new IndexOutOfBoundsException("index ∉ [-size(), size()]");
-        } else if (i > 0) {
-            index = i;
-            key = first;
-            for (int k = 0; k < index; k++) {
-                key = key.next;
+        if (Math.abs(i) > size() || i >= size() || first() == null) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            if (i >= 0) {
+                index = i;
+            } else {
+                index = size() + i;
             }
-        } else if (i < 0) {
-            index = this.size() + i;
-        } else if (i == 0) {
-            key = this.first;
         }
-        if (key.prev.next == null) {
-            key.prev.next = null;
+        Node<E> c = first;
+        final Node<E> zero = first;
+        if (index == 0) {
+            c = first.next;
+            first = first.next;
+            return zero.item;
         } else {
-            key.prev.next = key.next;
+            for (int k = 0; k < index; k++) {
+                c = c.next;
+            }
+            if (index < size()-1) {
+                c.prev.next = c.next;
+                c.next.prev = c.prev;
+                return c.item;
+            } else {
+                final Node<E> tail = c;
+                if (index == size()-1) {
+                    c.prev.next = null;
+                    c = null;
+                }
+                return tail.item;
+            }
         }
-        if (key.prev.prev == null) {
-            key.prev.prev = null;
-        } else {
-            key.prev.prev = key.prev;
-        }
-        size--;
-        return (E) key.item;
     }
 
     /**
@@ -376,7 +350,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             s = s + ", " + c.item.toString();
             c = c.next;
         }
-      return " list: [ "+s  + ", " + c.item+ " ] ";
+        return " list: [ " + s + ", " + c.item + " ] ";
     }
 }
 
