@@ -5,12 +5,13 @@ import ca.camosun.ics124.lab4.List;
 
 import java.util.NoSuchElementException;
 
+/**
+ * @author C0527253  wenlong
+ * @param first and last are the link to connect nodes,each node has prev and
+ */
+
 public class LinkedLists<E> implements List<E>, Stack<E> {
-    // s for test the result of add and remove
-//    String s="list[  ]: ";
     int size = 0;
-    List<E> list;
-    //    E item;
     Node first;
     Node last;// useless
 
@@ -20,13 +21,14 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         size = 0;
     }
 
-    public void traverse(String s) {
+    public void traverse(String whatWeHaveNow) {
         Node current = this.first;
-        System.out.println("\n"+s);
+        System.out.println("\n" + whatWeHaveNow + "what we got:");
         while (current != null) {
             System.out.print(current.item + " ");
             current = current.next;
         }
+        System.out.println("\n");
     }
 
     /**
@@ -36,34 +38,39 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      */
     @Override
     public boolean isEmpty() {
-        return this.size == 0;
+        return this.size() == 0;
     }
 
     /**
-     * Returns the number of elements in the list.
+     * Returns the number of elements in the list
      *
      * @return total number of elements stored in this collection.
      */
     @Override
     public int size() {
         int count = 0;
+        if (first == null) {
+            return 0;
+        }
         Node<E> tails = this.first;
-        while (tails != null) {
+        while (tails != null && tails.next != null) {
             tails = tails.next;
             count++;
         }
+        count++;
         return count;
     }
 
     /**
      * Add an element to the top of the stack.
+     *
      * @param e- the element to add to this collection.
      * @throws IllegalStateException - if the stack cannot hold more elements
      * @throws NullPointerException  - if a null element is provided
      */
     @Override
     public void push(E e) {
-        if(e==null){
+        if (e == null) {
             throw new NullPointerException("a null element is provided");
         }
         this.add(e);
@@ -76,7 +83,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      */
     @Override
     public E pop() {
-        return this.remove(this.size);
+        return this.remove(0);
     }
 
     /**
@@ -86,7 +93,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      */
     @Override
     public E peek() {
-        return this.last();
+        return this.first();
     }
 
     /**
@@ -95,7 +102,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      */
     @Override
     public void clear() {
-        for (Node<E> x = first; x != null; x=x.next) {
+        for (Node<E> x = first; x != null; x = x.next) {
             Node<E> next = x.next;
             x.item = null;
             x.next = null;
@@ -122,7 +129,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
     }
 
     /**
-     * Get the element stored at the beginning of the list. This element is not removed from the collection.     *
+     * Get the element stored at the beginning of the list. This element is not removed from the collection.
      *
      * @return the last (tail) element stored in this collection.
      * @throws NoSuchElementException - if the list is empty.
@@ -177,10 +184,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             this.first = newNode;
             return;
         }
-        Node current = first;
-        while (current.prev != null) {
-            current = current.prev;
-        }
+        final Node current = first;
         first = newNode;
         first.next = current;
         current.prev = first;
@@ -218,7 +222,8 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             x.next = d;
             c.next = x;
             x.prev = c;
-        }else if(index==0){
+            size++;
+        } else if (index == 0) {
             add(e);
         }
 
@@ -247,22 +252,20 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         Node<E> c = first;
         final Node<E> zero = first;
         if (index == 0) {
-//            c = first.next;
-//            first = first.next;
-          first=  first.next;
-          first.next=first.next;
+            first = first.next;
+            first.next = first.next;
             return zero.item;
         } else {
             for (int k = 0; k < index; k++) {
                 c = c.next;
             }
-            if (index < size()-1) {
+            if (index < size() - 1) {
                 c.prev.next = c.next;
                 c.next.prev = c.prev;
                 return c.item;
             } else {
                 final Node<E> tail = c;
-                if (index == size()-1) {
+                if (index == size() - 1) {
                     c.prev.next = null;
                     c = null;
                 }
@@ -337,20 +340,13 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         for (int k = 0; k < index; k++) {
             x = x.next;
         }
-        int num = this.size - index;
-//        this.list = new LinkedLists<E>(num, x, last);
-        return list;
+        final Node<E> cutter = x;
+        cutter.prev.next = null;
+        LinkedLists<E> newList = new LinkedLists<>();
+        newList.first = cutter;
+        newList.first.prev = null;
+        return newList;
     }
-//        this.list = new LinkedLists();
-//        try {
-//            Node cutter = (Node) get(i);
-//            list = new LinkedLists();
-//        } catch (IndexOutOfBoundsException index) {
-//            throw new IndexOutOfBoundsException("index ∉ [-size(), size())");
-//        }
-//        return this.list;
-//    }
-    //todo not finished ,get rid of list
 
     /**
      * @return
@@ -364,15 +360,19 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
                 s = s + ", " + c.item.toString();
                 c = c.next;
             }
-            return " list: [ " + s + ", " + c.item + " ] ";
-        }catch (Exception e){
+            s = " list: [ " + s + ", " + c.item + " ] ";
+            return s;
+        } catch (Exception e) {
             System.out.println(" list is empty  ");
-           return " list is empty  " ;
+            return " list is empty  ";
         }
-
     }
 }
 
+/**
+ * @author C0527253  wenlong
+ * @param next and prev are the link to connect nodes,each node has prev and
+ */
 class Node<E> {
     E item;
     Node<E> next;
@@ -382,12 +382,5 @@ class Node<E> {
         this.item = element;
         this.next = null;
         this.prev = null;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "item=" + item +
-                '}';
     }
 }
