@@ -223,6 +223,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             }
         }
         Node c = first;
+        final Node zero = first;
 //        System.out.println("c in remove hash: " + c.hashCode());
 //        System.out.println("first in remove hash: " + first.hashCode());
 //        System.out.println("c==first: " + (c == first));
@@ -231,14 +232,13 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             first=first.next;
 //            first.next.prev = c;
 //            c.next = first.next;
-            return (E) c.item;
+            return (E) zero.item;
         }
         for (int k = 0; k < index; k++) {
             c = c.next;
         }
         c.prev.next = c.next;
         c.next.prev = c.prev;
-        Node e = c;
 //        System.out.println("e in remove hash: " + e.hashCode());
         return (E) c.item;
     }
@@ -376,11 +376,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             s = s + ", " + c.item.toString();
             c = c.next;
         }
-
-        //System.out.println(list.stream().collect(Collectors.joining(" ")));
-//        System.out.println( list.iterator().toString());// doesn't print out every element
-        return " list: [ "+s  + ", " + c.item+ " ] ";
-        //+System.lineSeparator()
+      return " list: [ "+s  + ", " + c.item+ " ] ";
     }
 }
 

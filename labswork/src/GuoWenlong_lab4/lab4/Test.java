@@ -32,8 +32,8 @@ public class Test {
         System.out.println("list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 2 get :"+list.indexOf(1));
         System.out.println(list.printOut()+" list = [2,1,0] test for add(66,1) list = [2,66,1,0],expect: 3 get :"+list.indexOf(0));
         System.out.println(list.printOut());
-//        System.out.println(list.remove(0) + "  "+list.printOut());
-//        System.out.println(list.remove(1) + "  "+list.printOut());
+        System.out.println(list.remove(0) + "  "+list.printOut());
+        System.out.println(list.remove(1) + "  "+list.printOut());
 
     }
     public Object[] toArray(LinkedLists lists){
