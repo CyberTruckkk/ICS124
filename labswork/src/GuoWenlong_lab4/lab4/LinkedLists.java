@@ -236,8 +236,10 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         Node<E> c = first;
         final Node<E> zero = first;
         if (index == 0) {
-            c = first.next;
-            first = first.next;
+//            c = first.next;
+//            first = first.next;
+          first=  first.next;
+          first.next=first.next;
             return zero.item;
         } else {
             for (int k = 0; k < index; k++) {
