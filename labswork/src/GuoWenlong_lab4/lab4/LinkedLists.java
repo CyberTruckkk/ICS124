@@ -20,19 +20,6 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         size = 0;
     }
 
-//    public LinkedLists(int size, Node first, Node last) {
-//        this.size = size;
-//        this.first = first;
-//        this.last = last;
-//    }
-    //    public LinkedLists(Node first, Node last) {
-//        this.first = first;
-//        this.last = last;
-//        this.first.next = this.last;
-//        this.last.prev = this.first;
-//
-//    }
-
     /**
      * Test whether any elements are currently waiting on the stack.
      *
@@ -51,13 +38,11 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
     @Override
     public int size() {
         int count = 0;
-        System.out.println("size(before while loop) " + count);
         Node<E> tails = this.first;
         while (tails != null) {
             tails = tails.next;
             count++;
         }
-        System.out.println("size(after while loop) " + count);
         return count;
     }
 
@@ -181,9 +166,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             this.first = newNode;
             return;
         }
-
         Node current = first;
-
         while (current.prev != null) {
             current = current.prev;
         }
@@ -212,11 +195,12 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         } else if (i < 0) {
             index = this.size() + i;
         }
-        System.out.println("add index after check i><0, i= " + i + " after check i = " + index);
+//        System.out.println("add index after check i><0, i= " + i + " after check i = " + index);
         Node<E> x = new Node<>(e);
         Node<E> c = first;
         Node<E> d = first;
-        for (int k = 0; k < index - 1; k++) {
+
+        for (int k = 0; k < index; k++) {
             c = c.next;
         }
         d = c.next;
@@ -224,14 +208,12 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         x.next = d;
         c.next = x;
         x.prev = c;
-//        Node<E> insert = new Node(x, get(index), xNext);
-        //todo get method may destroy the original list ,need to figure out
     }
 
     @Override
     public E remove(int i) throws IndexOutOfBoundsException {
         int index = 0;
-        if (Math.abs(i) > size() || i >= size()) {
+        if (Math.abs(i) > size() || i >= size()||first==null) {
             throw new IndexOutOfBoundsException();
         } else {
             if (i >= 0) {
@@ -241,22 +223,23 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
             }
         }
         Node c = first;
-        Node d = first.next;
-
-        System.out.println("c in remove hash: "+c.hashCode());
-        System.out.println("first in remove hash: "+first.hashCode());
-        System.out.println("c==first: " + (c==first));
-
+//        System.out.println("c in remove hash: " + c.hashCode());
+//        System.out.println("first in remove hash: " + first.hashCode());
+//        System.out.println("c==first: " + (c == first));
+        if (index == 0) {
+            c = first.next;
+            first=first.next;
+//            first.next.prev = c;
+//            c.next = first.next;
+            return (E) c.item;
+        }
         for (int k = 0; k < index; k++) {
             c = c.next;
         }
-        c.prev=c.next;
-        c.next=c.prev;//dosen't effect the list itself ,X
-        // if index = 0; c is first;
-        // to remove [c,remove,d]
-
+        c.prev.next = c.next;
+        c.next.prev = c.prev;
         Node e = c;
-        System.out.println("e in remove hash: "+e.hashCode());
+//        System.out.println("e in remove hash: " + e.hashCode());
         return (E) c.item;
     }
 
@@ -389,17 +372,17 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         String s = "";
 //        E[] sArray = (E[]) new Object[size()];
         Node c = first;
-        while (c != null) {
+        while (c.next != null) {
             s = s + ", " + c.item.toString();
             c = c.next;
         }
+
         //System.out.println(list.stream().collect(Collectors.joining(" ")));
 //        System.out.println( list.iterator().toString());// doesn't print out every element
-        return s;
+        return " list: [ "+s  + ", " + c.item+ " ] ";
         //+System.lineSeparator()
     }
 }
-
 
 class Node<E> {
     E item;
