@@ -25,17 +25,15 @@ public class Test {
         list.add(66,0);
         System.out.println("indeex of 66 "+list.indexOf(66));
         System.out.println("size:4 " + list.size());
-        System.out.println("printOut"+list.printOut());
-        System.out.println(list.printOut());
         System.out.println(list.remove(0) + " expect 66 ,[2,1,0] "+list.printOut());
-        System.out.println("after 0"+list.printOut());
-        System.out.println(list.remove(-1) + "  "+list.printOut());
         list.add(3);
         System.out.println(list.printOut());
         System.out.println("test for get(1),expect: 2 get :"+list.get(1));
         System.out.println("test for get(1),expect: 2 get :"+list.get(0));
         System.out.println(list.printOut());
         list.add(77);
+        list.clear();
+        list.printOut();
 
     }
     public Object[] toArray(LinkedLists lists){

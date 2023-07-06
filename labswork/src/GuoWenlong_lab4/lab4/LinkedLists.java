@@ -57,13 +57,15 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
 
     /**
      * Add an element to the top of the stack.
-     *
      * @param e- the element to add to this collection.
      * @throws IllegalStateException - if the stack cannot hold more elements
      * @throws NullPointerException  - if a null element is provided
      */
     @Override
     public void push(E e) {
+        if(e==null){
+            throw new NullPointerException("a null element is provided");
+        }
         this.add(e);
     }
 
@@ -93,7 +95,7 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
      */
     @Override
     public void clear() {
-        for (Node<E> x = first; x != null; ) {
+        for (Node<E> x = first; x != null; x=x.next) {
             Node<E> next = x.next;
             x.item = null;
             x.next = null;
@@ -357,11 +359,17 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         String s = "";
 //        E[] sArray = (E[]) new Object[size()];
         Node c = first;
-        while (c.next != null) {
-            s = s + ", " + c.item.toString();
-            c = c.next;
+        try {
+            while (c.next != null) {
+                s = s + ", " + c.item.toString();
+                c = c.next;
+            }
+            return " list: [ " + s + ", " + c.item + " ] ";
+        }catch (Exception e){
+            System.out.println(" list is empty  ");
+           return " list is empty  " ;
         }
-        return " list: [ " + s + ", " + c.item + " ] ";
+
     }
 }
 
