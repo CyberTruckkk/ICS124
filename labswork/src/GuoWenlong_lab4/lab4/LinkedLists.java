@@ -21,6 +21,10 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         size = 0;
     }
 
+    /**
+     * this method is used to loop through and printout the nodes elements in the list
+     * @param whatWeHaveNow,show the information you want to printout ,[a,b,c]before the operation,like that
+     */
     public void traverse(String whatWeHaveNow) {
         Node current = this.first;
         System.out.println("\n" + whatWeHaveNow + "what we got:");
@@ -382,5 +386,12 @@ class Node<E> {
         this.item = element;
         this.next = null;
         this.prev = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "item=" + item +
+                '}';
     }
 }
