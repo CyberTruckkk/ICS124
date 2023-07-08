@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author C0527253  wenlong
- * @param first and last are the link to connect nodes,each node has prev and
+ * @param first are the head of a double linked list,got the first got the whole
  */
 
 public class LinkedLists<E> implements List<E>, Stack<E> {
@@ -21,6 +21,10 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
         size = 0;
     }
 
+    /**
+     * use this method to loop through the list ,to check whats in it;
+     * @param whatWeHaveNow
+     */
     public void traverse(String whatWeHaveNow) {
         Node current = this.first;
         System.out.println("\n" + whatWeHaveNow + "what we got:");
