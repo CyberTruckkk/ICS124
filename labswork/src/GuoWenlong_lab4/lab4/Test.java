@@ -22,6 +22,7 @@ public class Test {
         System.out.println("add at index 0");
         list.add(66, 0);
         list.traverse("[66,2,1,0]");
+        System.out.println(list.printOut());
         System.out.println("indeex of 66 " + list.indexOf(66));
         System.out.println("size:4 " + list.size());
         System.out.println(list.remove(0) + " expect get 66");
@@ -52,7 +53,6 @@ public class Test {
         list.add(2);
         list.traverse("[2,1,0]");
         System.out.println("test for peek() [2,1,0],expect:2,  " + list.peek());
-        System.out.println("test for peek() [2,1,0]" + list.last());
         System.out.println("test for size() [2,1,0],expect:3, " + list.size());
         System.out.println("test for pop() [2,1,0],expect:2, " + list.pop());
         list.traverse("[2,1,0] after pop()");

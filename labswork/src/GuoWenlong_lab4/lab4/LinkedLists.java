@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author C0527253  wenlong
- * @param first are the head of a double linked list,got the first got the whole
+ * @param first and last are the link to connect nodes,each node has prev and
  */
 
 public class LinkedLists<E> implements List<E>, Stack<E> {
@@ -22,8 +22,8 @@ public class LinkedLists<E> implements List<E>, Stack<E> {
     }
 
     /**
-     * use this method to loop through the list ,to check whats in it;
-     * @param whatWeHaveNow
+     * this method is used to loop through and printout the nodes elements in the list
+     * @param whatWeHaveNow,show the information you want to printout ,[a,b,c]before the operation,like that
      */
     public void traverse(String whatWeHaveNow) {
         Node current = this.first;
@@ -386,5 +386,12 @@ class Node<E> {
         this.item = element;
         this.next = null;
         this.prev = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "item=" + item +
+                '}';
     }
 }
