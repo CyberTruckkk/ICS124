@@ -1,5 +1,6 @@
 package lab05;
 
+import WenlongLab01.Person;
 import lab2.Rational;
 
 import java.util.ArrayList;
@@ -18,8 +19,22 @@ public class TestForPart1<E> {
         list.add(r3);
 //        list.forEach(System.out::println);
         loops(list);
-        System.out.println("test for method1 ,minOne(),expect(0.3...) get: " + Part1.minOne(list).doubleValue());
-
+        System.out.println("test for  Rational minOne ,minOne(),expect(0.3...) get: " + Part1.minOne(list).doubleValue());
+        List<Double> dblist = new ArrayList<>();
+        dblist.add(1.11);
+        dblist.add(2.11);
+        dblist.add(3.11);
+        System.out.println("test for double maxOne,expect(3.11) get: " + Part1.maxOne(dblist));
+        ArrayList<String> strList = new ArrayList<>();
+        strList.add("banana");
+        strList.add("cherry");
+        strList.add("apple");
+        System.out.println("test for double orderStr,expect[apple, banana, cherry] get: "+Part1.orderStr(strList));
+        ArrayList<Person> ap = new ArrayList<>();
+        ap.add(new Person("jack","smith"));
+        ap.add(new Person("louis","vitton"));
+        ap.add(new Person("elon","musk"));
+        System.out.println("test for double orderStr,expect[elon musk (ID#:0003), jack smith (ID#:0001), louis vitton (ID#:0002)] get: "+Part1.orderPerson(ap));
 
     }
 
