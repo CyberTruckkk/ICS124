@@ -45,3 +45,10 @@ class sortBySureName implements Comparator<Person> {
         return o1.sureName.compareTo(o2.sureName);
     }
 }
+class sortBysal implements Comparator<Employee>{
+
+    @Override
+    public int compare(Employee o1, Employee o2) {
+        return o1.getAnnualSalary().compareTo(o2.getAnnualSalary());
+    }
+}
