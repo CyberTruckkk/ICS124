@@ -1,5 +1,6 @@
 package lab05;
 
+import WenlongLab01.Employee;
 import WenlongLab01.Person;
 import lab2.Rational;
 
@@ -43,5 +44,11 @@ class sortBySureName implements Comparator<Person> {
     @Override
     public int compare(Person o1, Person o2) {
         return o1.sureName.compareTo(o2.sureName);
+    }
+}
+class sortBySal implements Comparator<Employee>{
+    @Override
+    public int compare(Employee o1, Employee o2) {
+        return o1.getAnnualSalary().compareTo(o2.getAnnualSalary());
     }
 }
