@@ -15,8 +15,8 @@ public class Nurse extends Employee {
     /**
      * each nurse's shift is set when it's created
      */
-    public Nurse(String unit, String givenName, String sureName) {
-        super(unit, givenName, sureName);
+    public Nurse(String unit, String givenName, String sureName,int sal) {
+        super(unit, givenName, sureName,sal);
         this.shift = SHIFT_A;// set shift by parsing static varieables
     }
     

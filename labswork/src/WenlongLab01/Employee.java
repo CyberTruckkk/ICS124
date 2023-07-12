@@ -15,9 +15,10 @@ public class Employee extends Person {
      * @param sureName from class Person super( givenName, sureName) nesting
      * constructor from super class Person
      */
-    public Employee(String unit, String givenName, String sureName) {
+    public Employee(String unit, String givenName, String sureName,int sal) {
         super(givenName, sureName);
         this.unit = unit;
+        this.annualSalary=sal;
     }
 
     /**

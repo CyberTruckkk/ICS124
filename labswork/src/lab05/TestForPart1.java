@@ -1,5 +1,6 @@
 package lab05;
 
+import WenlongLab01.Employee;
 import WenlongLab01.Person;
 import lab2.Rational;
 
@@ -36,6 +37,12 @@ public class TestForPart1<E> {
         ap.add(new Person("elon","musk"));
         System.out.println("test for double orderStr,expect[elon musk (ID#:0003), jack smith (ID#:0001), louis vitton (ID#:0002)] get: "+Part1.orderPerson(ap));
 
+        ArrayList<Employee>employeeArrayList = new ArrayList<>();
+        employeeArrayList.add(new Employee("a","jack","ma",888888));
+        employeeArrayList.add(new Employee("a","elon","musk",99999999));
+        employeeArrayList.add(new Employee("b","louis","vitton",6666));
+        System.out.println(employeeArrayList);
+        System.out.println("test for sortBysal + " + Part1.orderBysal(employeeArrayList));
     }
 
     public static void loops(List<Rational> list) {

@@ -14,8 +14,8 @@ public class Doctor extends Employee {
      * super(unit,  givenName, sureName) nesting constructor from Super class Employee
      */
 
-    public Doctor(String unit, String specialty, String givenName, String sureName) {
-        super(unit,  givenName, sureName);
+    public Doctor(String unit, String specialty, String givenName, String sureName,int sal) {
+        super(unit,  givenName, sureName,sal);
         this.specialty = specialty;
         this.annualSalary = 250000;
     }
