@@ -6,6 +6,7 @@ import WenlongLab01.Patient;
 import WenlongLab01.Person;
 import lab2.Rational;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class TestForPart1<E> {
         ArrayList<String> strList = new ArrayList<>();
         strList.add("banana");
         strList.add("cherry");
+        strList.add("damson");
         strList.add("apple");
         System.out.println("test for double orderStr,expect[apple, banana, cherry] get: "+Part1.orderStr(strList));
         ArrayList<Person> ap = new ArrayList<>();
@@ -53,12 +55,17 @@ public class TestForPart1<E> {
         Doctor doctor = new Doctor("unit1", "surgy", "jack", "ma", 666666);
         Doctor doctor1 = new Doctor("unit2", "surgy", "jack", "sparrow", 888888);
         patientArrayList.add(new Patient("a","a",doctor1));
-        patientArrayList.add(new Patient("b","b",doctor));
-        patientArrayList.add(new Patient("d","d",null));
         patientArrayList.add(new Patient("e","e",null));
+        patientArrayList.add(new Patient("b","b",doctor));
         patientArrayList.add(new Patient("c","c",null));
+        patientArrayList.add(new Patient("f","f",doctor));
+        List<Patient>  patientList = new ArrayList<>();
+        patientList.addAll(patientArrayList);
+        Patient patient = new Patient("e", "e", doctor);
+        patientList.add(patient);
         System.out.println("#7 test for sortBysal + " + Part1.nullPhysic(patientArrayList));
-
+        Part1.customSort(patientList);
+        System.out.println(patientList);
     }
 
     public static void loops(List<Rational> list) {

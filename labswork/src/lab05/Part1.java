@@ -17,12 +17,8 @@ public class Part1<E> implements Comparator<Rational> {
     }
 
     public static List<String> orderStr(List<String> list) {
-        ArrayList<String> str = new ArrayList<>();
-        for (String c : list) {
-            str.add(c);
-        }
-        Collections.sort(str);
-        return str;
+        Collections.sort(list);
+        return list;
     }
 
     public static double maxOne(List<Double> list) {
@@ -56,14 +52,44 @@ public class Part1<E> implements Comparator<Rational> {
 
     public static List<Patient> nullPhysic(List<Patient> plist) {
 //        List<Patient> nullp = plist.stream().filter(patient -> patient.physician==null).min(Comparator.comparing(Patient::getSureName));
-        List<Patient> nullp = plist.stream().filter(patient -> patient.physician==null).collect(Collectors.toList());
+        List<Patient> nullp = plist.stream().filter(patient -> patient.physician == null).collect(Collectors.toList());
 
-         Collections.sort(nullp,new sortBySureName());
-         return  nullp;
+        Collections.sort(nullp, new sortBySureName());
+        return nullp;
 
     }
-}
 
+    /**
+     * rearranges a List of Patient objects so that all the patients
+     * that do not have an assigned physician are moved to the front of the list,
+     * in ascending order by ID.
+     * The order of the remainder of the list (where patients have a non-null physician) is irrelevant.
+     * @param patientsList the list of patients to be been rearranged
+     * @return the list of patients that has been rearranged
+     */
+    public static <T extends Patient> void customSort(List<T> patientsList) {
+        List<T> listHead = new ArrayList<>();
+        List<T> listTail = new ArrayList<>();
+        for (T p : patientsList) {
+            if (p.physician != null) {
+                listHead.add(p);
+            } else {
+                listTail.add(p);
+            }
+//            Collections.sort(listHead,new sortByID());
+        }
+        patientsList.clear();
+        patientsList.addAll(listHead);
+        patientsList.addAll(listTail);
+    }
+}
+class sortByID implements Comparator< Patient>{
+
+    @Override
+    public int compare(Patient o1, Patient o2) {
+        return Integer.compare(o1.ID, o2.ID);
+    }
+}
 class sortBySureName implements Comparator<Person> {
 
     @Override
