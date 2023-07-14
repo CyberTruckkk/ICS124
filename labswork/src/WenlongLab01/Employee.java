@@ -21,6 +21,10 @@ public class Employee extends Person {
         this.annualSalary=sal;
     }
 
+    public String getSureName() {
+        return this.sureName;
+    }
+
     /**
      *
      * @return returns the annualSalary of each instance: Employee Doctor and
