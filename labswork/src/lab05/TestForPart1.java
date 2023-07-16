@@ -21,20 +21,20 @@ public class TestForPart1<E> {
         list.add(r1);
         list.add(r2);
         list.add(r3);
-//        list.forEach(System.out::println);
+
         loops(list);
-        System.out.println("test for  Rational minOne ,minOne(),expect(0.3...) get: " + Part1.minOne(list).doubleValue());
+        System.out.println("#1 test for  Rational minOne ,minOne(),expect(0.3...) \nget: " + Part1.minOne(list).doubleValue());
         List<Double> dblist = new ArrayList<>();
         dblist.add(1.11);
         dblist.add(2.11);
         dblist.add(3.11);
-        System.out.println("test for double maxOne,expect(3.11) get: " + Part1.maxOne(dblist));
+        System.out.println("#3 test for double maxOne,expect(3.11) get: " + Part1.maxOne(dblist));
         ArrayList<String> strList = new ArrayList<>();
         strList.add("banana");
         strList.add("cherry");
         strList.add("damson");
         strList.add("apple");
-        System.out.println("test for double orderStr,expect[apple, banana, cherry] get: "+Part1.orderStr(strList));
+        System.out.println("#2 test for double orderStr,expect[apple, banana, cherry,damson] \nget: "+Part1.orderStr(strList));
         ArrayList<Person> ap = new ArrayList<>();
         ap.add(new Person("jack","smith"));
         ap.add(new Person("louis","vitton"));
@@ -55,28 +55,40 @@ public class TestForPart1<E> {
         Doctor doctor = new Doctor("unit1", "surgy", "jack", "ma", 666666);
         Doctor doctor1 = new Doctor("unit2", "surgy", "jack", "sparrow", 888888);
         patientArrayList.add(new Patient("a","a",doctor1));
-        patientArrayList.add(new Patient("e","e",null));
+        patientArrayList.add(new Patient("null ","e",null));
         patientArrayList.add(new Patient("b","b",doctor));
-        patientArrayList.add(new Patient("c","c",null));
+        patientArrayList.add(new Patient("null ","c",null));
         patientArrayList.add(new Patient("f","f",doctor));
         List<Patient>  patientList = new ArrayList<>();
         patientList.addAll(patientArrayList);
-        Patient patient = new Patient("e", "e", doctor);
+        Patient patient = new Patient("d", "d", doctor);
         patientList.add(patient);
         System.out.println("#7 test for sortBysal + " + Part1.nullPhysic(patientArrayList));
+
+        // TASK 2
+        Patient patient1 = new Patient("g", "g", doctor);
+        Patient patient2 = new Patient("h", "h", doctor);
+        Patient patient3 = new Patient("i", "i", doctor);
+        patientList.add(patient3);
+        patientList.add(patient2);
+        patientList.add(patient1);
+        System.out.println("# task2 before sort \n"+patientList);
         Part1.customSort(patientList);
-        System.out.println(patientList);
+        System.out.println("after sort  expect \n [a a (ID#:0011), b b (ID#:0013), f f (ID#:0015), d d (ID#:0016), g g (ID#:0017), h h (ID#:0018), i i (ID#:0019), null  e (ID#:0012), null  c (ID#:0014)] \n get: \n"+patientList);
+        /**
+         * - when all the patients have a physician that means no need to perform a filter option ,in that case ,java build in collection
+         * performs faster.
+         * - in other word , a list of patients with half of them without physician,the sotring method we just created perfotms better,cause bubble sort
+         * run with a bigO(N2) and thhis method first filter runs a bigO(N)
+         */
     }
 
     public static void loops(List<Rational> list) {
+        System.out.println("rational double value ");
         for (Rational r : list) {
-            System.out.println(r.doubleValue());
+            System.out.print(r.doubleValue() +"\t");
         }
+        System.out.println();
     }
 
-    /**
-     *         for (Rational r : list) {
-     *             System.out.println(r.doubleValue());
-     *         }
-     */
 }
